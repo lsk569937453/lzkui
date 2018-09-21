@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.elong.hotel:hchecklist-common:2.1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/elong/hotel/hchecklist-common/2.1.0-SNAPSHOT/hchecklist-common-2.1.0-20180920.063110-20.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/elong/hotel/hchecklist-common/2.1.0-SNAPSHOT/hchecklist-common-2.1.0-20180920.063110-20-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/elong/hotel/hchecklist-common/2.1.0-SNAPSHOT/hchecklist-common-2.1.0-20180920.063110-20-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

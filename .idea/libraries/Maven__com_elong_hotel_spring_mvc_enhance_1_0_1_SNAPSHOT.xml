@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.elong.hotel:spring-mvc-enhance:1.0.1-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/elong/hotel/spring-mvc-enhance/1.0.1-SNAPSHOT/spring-mvc-enhance-1.0.1-20171214.113214-9.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/elong/hotel/spring-mvc-enhance/1.0.1-SNAPSHOT/spring-mvc-enhance-1.0.1-20171214.113214-9-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/elong/hotel/spring-mvc-enhance/1.0.1-SNAPSHOT/spring-mvc-enhance-1.0.1-20171214.113214-9-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
