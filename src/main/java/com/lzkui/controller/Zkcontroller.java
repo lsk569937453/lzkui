@@ -1,12 +1,15 @@
 package com.lzkui.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.lzkui.entity.PathEntity;
+import com.lzkui.entity.ZKNodeDataEntity;
 import com.lzkui.service.ZookeeperService;
+import org.apache.zookeeper.data.Stat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -29,17 +32,47 @@ import java.util.List;
  * @since JDK1.7
  */
 @Controller
+@RequestMapping("/zk")
 public class Zkcontroller {
 	@Autowired
 	private ZookeeperService zookeeperService;
 
-	@RequestMapping(value = "/getData",method = RequestMethod.POST)
+	@RequestMapping(value = "/getChildren",method = RequestMethod.POST)
 	@ResponseBody
-	public String getData(@RequestParam("path")String path)
+	public String getData(@RequestBody PathEntity path)
 	{
-		List<String> resultList=zookeeperService.getChildren(path,false);
+		List<String> resultList=zookeeperService.getChildren(path.getPath(),false);
 
 		return JSON.toJSONString(resultList);
+
+	}
+	@RequestMapping(value = "/getPathData",method = RequestMethod.POST)
+	@ResponseBody
+	public String getPathData(@RequestBody PathEntity path)
+	{
+
+		ZKNodeDataEntity zkNodeDataEntity=new ZKNodeDataEntity();
+		try {
+			Stat stat = zookeeperService.exists(path.getPath(), false);
+			zkNodeDataEntity.setStat(stat);
+
+		}catch (Throwable e)
+		{
+			zkNodeDataEntity.setStatCode(-1);
+		}
+		try {
+
+			String resultList = zookeeperService.readData(path.getPath(), false);
+			zkNodeDataEntity.setData(resultList);
+
+		}catch (Exception e)
+		{
+			zkNodeDataEntity.setDataCode(-1);
+		}
+
+
+
+		return JSON.toJSONString(zkNodeDataEntity);
 
 	}
 }
