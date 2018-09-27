@@ -15,13 +15,13 @@ resources/conf/env/zkconfig.properties.
 
 Backend Technology Stack
 ====
-1、Springboot
-2、Java
-3、Apache.curator
+1、Springboot<br>
+2、Java<br>
+3、Apache.curator<br>
 
 Frontend  Technology Stack
 ====
-Antd
-Dva
-React
-The frontend project is [here]("https://github.com/lsk569937453/lzkuiFrontend").
+Antd<br>
+Dva<br>
+React<br>
+The frontend project is [here](https://github.com/lsk569937453/lzkuiFrontend).
