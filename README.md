@@ -22,7 +22,7 @@ Backend Technology Stack
 
 Frontend  Technology Stack
 ====
-Antd<br>
-Dva<br>
+[Antd](https://ant.design/)<br>
+[Dva](https://github.com/dvajs/dva)<br>
 React<br>
 The frontend project is [here](https://github.com/lsk569937453/lzkuiFrontend).
