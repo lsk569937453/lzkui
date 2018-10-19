@@ -1,8 +1,10 @@
 package com.lzkui.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.lzkui.entity.BaseResponse;
 import com.lzkui.entity.PathEntity;
 import com.lzkui.entity.ZKNodeDataEntity;
+import com.lzkui.entity.ZkNodePropertySave;
 import com.lzkui.service.ZookeeperService;
 import org.apache.zookeeper.data.Stat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,4 +77,24 @@ public class Zkcontroller {
 		return JSON.toJSONString(zkNodeDataEntity);
 
 	}
+	@RequestMapping(value = "/savePathproperty",method = RequestMethod.POST)
+	@ResponseBody
+	public String saveNodeProperty(@RequestBody ZkNodePropertySave zkNodePropertySave)
+	{
+		BaseResponse response=new BaseResponse();
+		try {
+
+			boolean result = zookeeperService.writeData(zkNodePropertySave.getPath(), zkNodePropertySave.getNodeProperty());
+
+			if(result!=true)
+				response.setRetcode(-1);
+		}catch (Exception e)
+		{
+			response.setRetcode(-1);
+		}
+
+		return JSON.toJSONString(response);
+
+	}
+
 }

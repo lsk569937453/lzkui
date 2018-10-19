@@ -37,10 +37,9 @@ import java.util.List;
  * @version 1.0
  * @since JDK1.7
  */
-public class ZookeeperServiceImpl implements ZookeeperService{
+public class ZookeeperServiceImpl implements ZookeeperService {
 
 	private static Logger LOG = org.slf4j.LoggerFactory.getLogger(ZookeeperServiceImpl.class);
-
 
 	private CuratorFramework client;
 	private String zookeeperServer;
@@ -119,14 +118,34 @@ public class ZookeeperServiceImpl implements ZookeeperService{
 			RetryPolicy retryPolicy = new RetryForever(retryInterval);
 			Builder builder = CuratorFrameworkFactory.builder().connectString(zookeeperServer).retryPolicy(retryPolicy)
 					.sessionTimeoutMs(sessionTimeoutMs).connectionTimeoutMs(connectionTimeoutMs);
-			if (StringUtils.isNotBlank(auth))
+			if (StringUtils.isNotBlank(auth)) {
 				builder.authorization("digest", auth.getBytes());
+
+//				//默认创建的根节点是没有做权限控制的--需要自己手动加权限???----
+//				ACLProvider aclProvider = new ACLProvider() {
+//					private List<ACL> acl;
+//
+//					@Override public List<ACL> getDefaultAcl() {
+//						if (acl == null) {
+//							ArrayList<ACL> acl = ZooDefs.Ids.CREATOR_ALL_ACL;
+//							acl.clear();
+//							acl.add(new ACL(Perms.ALL, new Id("auth", auth)));
+//							this.acl = acl;
+//						}
+//						return acl;
+//					}
+//
+//					@Override public List<ACL> getAclForPath(String path) {
+//						return acl;
+//					}
+//				};
+//				builder.aclProvider(aclProvider);
+			}
 			client = builder.build();
 			client.start();
 			register();
-		}catch (Exception e)
-		{
-			LOG.error("zk strat error",e);
+		} catch (Exception e) {
+			LOG.error("zk strat error", e);
 		}
 	}
 
@@ -164,8 +183,7 @@ public class ZookeeperServiceImpl implements ZookeeperService{
 				@Override public void stateChanged(CuratorFramework client, ConnectionState state) {
 					//	ZookeeperRegistry.getRegistry().stateChanged(state);
 					LOG.info("the zk state is :" + state.name());
-					String text=state.name();
-
+					String text = state.name();
 
 				}
 			});
@@ -174,7 +192,6 @@ public class ZookeeperServiceImpl implements ZookeeperService{
 			LOG.error("注册出错", e);
 		}
 	}
-
 
 	@Override public void create(String path, boolean ephemeral) {
 		int i = path.lastIndexOf("/");
@@ -187,12 +204,13 @@ public class ZookeeperServiceImpl implements ZookeeperService{
 			createPath(path, CreateMode.PERSISTENT);
 		}
 	}
+
 	/**
 	 * 递归创建节点, 若路径已存在, 则更新节点数据
 	 *
-	 * @param path	节点path
-	 * @param createMode	创建的节点类型
-	 * @return	成功-true 失败-false
+	 * @param path    节点path
+	 * @param createMode    创建的节点类型
+	 * @return 成功-true 失败-false
 	 */
 	private void createPath(String path, CreateMode createMode) {
 		try {
@@ -202,8 +220,6 @@ public class ZookeeperServiceImpl implements ZookeeperService{
 			throw new IllegalStateException(e.getMessage(), e);
 		}
 	}
-
-
 
 	@Override public void releaseConnection() {
 
@@ -245,6 +261,7 @@ public class ZookeeperServiceImpl implements ZookeeperService{
 	 */
 	@Override public boolean writeData(String path, String data) {
 		try {
+
 			this.client.setData().forPath(path, data.getBytes());
 			return true;
 		} catch (Exception e) {
