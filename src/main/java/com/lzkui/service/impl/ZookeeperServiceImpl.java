@@ -226,6 +226,12 @@ public class ZookeeperServiceImpl implements ZookeeperService {
 	}
 
 	@Override public void delete(String path) {
+		try {
+			this.client.delete().forPath(path);
+		}   catch (Exception e)
+		{
+			LOG.error("delete node error",e);
+		}
 
 	}
 

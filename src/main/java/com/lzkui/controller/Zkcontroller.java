@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.lzkui.entity.BaseResponse;
 import com.lzkui.entity.PathEntity;
 import com.lzkui.entity.ZKNodeDataEntity;
+import com.lzkui.entity.ZkAddNodeReqEntity;
 import com.lzkui.entity.ZkNodePropertySave;
 import com.lzkui.service.ZookeeperService;
 import org.apache.zookeeper.data.Stat;
@@ -88,6 +89,42 @@ public class Zkcontroller {
 
 			if(result!=true)
 				response.setRetcode(-1);
+		}catch (Exception e)
+		{
+			response.setRetcode(-1);
+		}
+
+		return JSON.toJSONString(response);
+
+	}
+	@RequestMapping(value = "/addNode",method = RequestMethod.POST)
+	@ResponseBody
+	public String saveNodeProperty(@RequestBody ZkAddNodeReqEntity zkAddNodeReqEntity)
+	{
+		BaseResponse response=new BaseResponse();
+		try {
+			String newPath=zkAddNodeReqEntity.getPath()+"/"+zkAddNodeReqEntity.getNodeValue();
+
+			zookeeperService.create(newPath, false);
+
+		}catch (Exception e)
+		{
+			response.setRetcode(-1);
+		}
+
+		return JSON.toJSONString(response);
+
+	}
+	@RequestMapping(value = "/deleteNode",method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteNode(@RequestBody PathEntity pathEntity)
+	{
+		BaseResponse response=new BaseResponse();
+		try {
+
+
+			zookeeperService.delete(pathEntity.path);
+
 		}catch (Exception e)
 		{
 			response.setRetcode(-1);
