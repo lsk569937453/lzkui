@@ -27,4 +27,4 @@ Frontend  Technology Stack
 React<br>
 The frontend project is [here](https://github.com/lsk569937453/lzkuiFrontend).
 
-[新图片](web/tutor.png)
+ ![image](https://github.com/lsk569937453/lzkui/blob/master/web/tutor.png)
