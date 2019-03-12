@@ -26,3 +26,5 @@ Frontend  Technology Stack
 [Dva](https://github.com/dvajs/dva)<br>
 React<br>
 The frontend project is [here](https://github.com/lsk569937453/lzkuiFrontend).
+
+[新图片](web／tutor.png)
